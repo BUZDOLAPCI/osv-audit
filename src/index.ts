@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 
 import { createHttpTransport } from './transport/http.js';
-import { createStandaloneServer } from './server.js';
 
 const PORT = parseInt(process.env['PORT'] || '8080', 10);
 const HOST = process.env['HOST'] || '0.0.0.0';
 
-const httpTransport = createHttpTransport(createStandaloneServer, {
+const httpTransport = createHttpTransport({
   host: HOST,
   port: PORT,
 });
