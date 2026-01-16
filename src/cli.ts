@@ -79,8 +79,8 @@ USAGE:
     osv-audit [OPTIONS]
 
 OPTIONS:
-    -t, --transport <TYPE>   Transport type: stdio (default) or http
-    -p, --port <PORT>        HTTP server port (default: 3000)
+    -t, --transport <TYPE>   Transport type: http (default) or stdio
+    -p, --port <PORT>        HTTP server port (default: 8080)
         --host <HOST>        HTTP server host (default: 127.0.0.1)
     -h, --help               Show this help message
     -v, --version            Show version information
@@ -94,14 +94,14 @@ ENVIRONMENT VARIABLES:
     DEBUG              Enable debug logging (true/false)
 
 EXAMPLES:
-    # Run with stdio transport (default)
+    # Run with HTTP transport on port 8080 (default)
     osv-audit
 
-    # Run with HTTP transport on port 8080
-    osv-audit --transport http --port 8080
+    # Run with stdio transport
+    osv-audit --transport stdio
 
     # Using environment variables
-    TRANSPORT=http PORT=3000 osv-audit
+    TRANSPORT=stdio osv-audit
 `);
 }
 
