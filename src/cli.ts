@@ -123,17 +123,17 @@ export async function main(args: string[] = process.argv.slice(2)): Promise<void
   }
 
   // Dynamically import to avoid circular dependencies
-  const { createServer } = await import('./server.js');
+  const { createServer, createStandaloneServer } = await import('./server.js');
   const { createStdioTransport, createHttpTransport } = await import('./transport/index.js');
 
-  const server = createServer();
-
   if (parsedArgs.transport === 'stdio') {
+    const server = createServer();
     const transport = createStdioTransport();
     await server.connect(transport);
     console.error('OSV Audit MCP server running on stdio');
   } else {
-    const httpTransport = createHttpTransport(server, {
+    // HTTP transport uses a factory function to create a new server per session
+    const httpTransport = createHttpTransport(createStandaloneServer, {
       host: parsedArgs.host,
       port: parsedArgs.port,
     });

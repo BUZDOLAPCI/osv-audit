@@ -10,6 +10,10 @@ import {
   SuggestFixesInputSchema,
 } from './types.js';
 
+/**
+ * Creates an MCP server instance with all tools registered.
+ * Use this for stdio transport or when you need a single server instance.
+ */
 export function createServer(): Server {
   const server = new Server(
     {
@@ -241,4 +245,13 @@ export function createServer(): Server {
   });
 
   return server;
+}
+
+/**
+ * Factory function that creates a new server instance.
+ * Use this for HTTP transport where each session needs its own server.
+ * This is required for the Dedalus marketplace HTTP transport.
+ */
+export function createStandaloneServer(): Server {
+  return createServer();
 }
