@@ -1,5 +1,4 @@
 export interface Config {
-  transport: 'stdio' | 'http';
   port: number;
   host: string;
   osvApiUrl: string;
@@ -9,9 +8,8 @@ export interface Config {
 
 export function loadConfig(): Config {
   return {
-    transport: (process.env['TRANSPORT'] as 'stdio' | 'http') || 'http',
     port: parseInt(process.env['PORT'] || '8080', 10),
-    host: process.env['HOST'] || '127.0.0.1',
+    host: process.env['HOST'] || '0.0.0.0',
     osvApiUrl: process.env['OSV_API_URL'] || 'https://api.osv.dev',
     requestTimeout: parseInt(process.env['REQUEST_TIMEOUT'] || '30000', 10),
     debug: process.env['DEBUG'] === 'true',
